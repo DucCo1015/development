@@ -1,12 +1,15 @@
 import React,{useState, useEffect} from 'react'
-import {BiPhoneCall, BiSolidSun} from 'react-icons/bi'
+import {BiPhoneCall, BiSolidMoon, BiSolidSun} from 'react-icons/bi'
 import {FaCaretDown} from 'react-icons/fa'
+import {HiMenuAlt1,HiMenuAlt3} from 'react-icons/hi'
+import ResponsiveMenu from './ResponsiveMenu'
 
 
 const Navbar = () => {
 
-  const [theme,setTheme] = useState("dark");
-  const element  =document.documentElement;
+  //set light and dark background color in localStorage
+  const [theme,setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
+  const element  = document.documentElement;
 
   useEffect(()=>{
     if(theme === 'dark'){
@@ -19,14 +22,20 @@ const Navbar = () => {
     }
   },[theme])
 
+  const [showMenu, setShowMenu] = useState(false) 
+  const toggleMenu = () =>{
+    setShowMenu(!showMenu)
+  }
+
   return (
-  <header className="bg_navbar text-white border-b-[1px] border-primary/50">
+    <>
+  <header className=" relative z-[99] bg_navbar text-white border-b-[1px] border-primary/50">
     <div className="container flex items-center justify-between h-[70px] py-2">
      <div className="logo text-2xl md:text-3xl text-white">
        <a href="#">COZ <span className='inline-block font-bold text-primary'>WEB</span></a>
      </div>
 
-     <div className="navigation">
+     <div className="navigation hidden md:block">
        <ul className='flex items-center gap-10'>
           <li className='group relative cursor-pointer'>
             <a href="#" className='flex items-center gap-[2px] h-[72px]'>Home
@@ -106,13 +115,46 @@ const Navbar = () => {
             <p>Call us on</p>
             <p><a href="+8412343556">+84 12343556</a></p>             
           </div>
-
-          <BiSolidSun className = 'text-2xl'/>
-
+          {
+            theme === 'dark' ? (
+              <BiSolidSun className = 'text-2xl' onClick={() => setTheme("light")}/>
+            ) : (
+              <BiSolidMoon className = 'text-2xl' onClick={() => setTheme("dark")}/>
+            )
+          }
        </ul>
      </div>
+
+     <div className="flex items-center gap-4 md:hidden ">
+            {theme === "dark" ? (
+              <BiSolidSun
+                onClick={() => setTheme("light")}
+                className="text-2xl"
+              />
+            ) : (
+              <BiSolidMoon
+                onClick={() => setTheme("dark")}
+                className="text-2xl"
+              />
+            )}
+            {showMenu ? (
+              <HiMenuAlt1
+                onClick={toggleMenu}
+                className=" cursor-pointer transition-all" 
+                size={30}     
+              />
+            ) : (
+              <HiMenuAlt3
+                onClick={toggleMenu}  
+                className="cursor-pointer transition-all" 
+                size={30}
+              />
+            )}
+          </div>
     </div>     
    </header>
+   <ResponsiveMenu showMenu = {showMenu}/>
+   </>
   )
 }
 
