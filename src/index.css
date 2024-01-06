@@ -6,4 +6,12 @@
  .bg_navbar{
   @apply bg-gradient-to-l from-violet-900 via-violet-800 to-violet-900
  }
+ .btn_primary{
+  @apply rounded-md border-2 border-primary bg-primary px-4 py-2 text-sm dark:text-white 
+  transition-colors duration-300 hover:bg-primary/80; 
+ }
+ .btn_outline{
+  @apply rounded-md border-2 border-white px-4 py-2 text-sm dark:text-white
+  transition-colors duration-300;
+ }
 }

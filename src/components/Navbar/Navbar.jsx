@@ -30,9 +30,9 @@ const Navbar = () => {
   return (
     <>
   <header className=" relative z-[99] bg_navbar text-white border-b-[1px] border-primary/50">
-    <div className="container flex items-center justify-between h-[70px] py-2">
+    <div className="container flex items-center justify-between h-[70px] py-2 sm:space-x-5">
      <div className="logo text-2xl md:text-3xl text-white">
-       <a href="#">COZ <span className='inline-block font-bold text-primary'>WEB</span></a>
+       <a href="#">COZ <span className='inline-block font-bold text-primary md:space-x-3 '>WEB</span></a>
      </div>
 
      <div className="navigation hidden md:block">
@@ -125,7 +125,7 @@ const Navbar = () => {
        </ul>
      </div>
 
-     <div className="flex items-center gap-4 md:hidden ">
+     <div className="flex items-center gap-4 md:hidden md:space-x-3">
             {theme === "dark" ? (
               <BiSolidSun
                 onClick={() => setTheme("light")}
